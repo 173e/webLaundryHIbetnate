@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/09/2017 10:56:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Sucursal" table="sucursal" catalog="bd_laundry_web_com" optimistic-lock="version">
+        <id name="idsucursal" type="int">
+            <column name="idsucursal" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="municipio" class="modelo.Municipio" fetch="select">
+            <column name="municipio_idmunicipio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="modelo.Usuario" fetch="select">
+            <column name="usuario_idusuario" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <set name="tiposericios" table="tiposericio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sucursal_idsucursal" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Tiposericio" />
+        </set>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sucursal_idsucursal" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Factura" />
+        </set>
+    </class>
+</hibernate-mapping>

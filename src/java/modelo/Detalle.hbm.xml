@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/09/2017 10:56:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Detalle" table="detalle" catalog="bd_laundry_web_com" optimistic-lock="version">
+        <id name="iddetalle" type="java.lang.Integer">
+            <column name="iddetalle" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="factura" class="modelo.Factura" fetch="select">
+            <column name="idfactura" not-null="true" />
+        </many-to-one>
+        <many-to-one name="producto" class="modelo.Producto" fetch="select">
+            <column name="producto_idservicio" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="descuento" type="big_decimal">
+            <column name="descuento" precision="12" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

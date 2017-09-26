@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/09/2017 10:56:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Producto" table="producto" catalog="bd_laundry_web_com" optimistic-lock="version">
+        <id name="idservicio" type="java.lang.Integer">
+            <column name="idservicio" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreSer" type="string">
+            <column name="nombre_ser" length="60" not-null="true" />
+        </property>
+        <property name="imagen" type="string">
+            <column name="imagen" length="80" not-null="true" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="12" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="45" />
+        </property>
+        <set name="detalles" table="detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="producto_idservicio" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Detalle" />
+        </set>
+    </class>
+</hibernate-mapping>

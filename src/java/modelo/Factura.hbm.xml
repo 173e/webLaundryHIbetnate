@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/09/2017 10:56:59 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Factura" table="factura" catalog="bd_laundry_web_com" optimistic-lock="version">
+        <id name="nofactura" type="java.lang.Integer">
+            <column name="nofactura" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sucursal" class="modelo.Sucursal" fetch="select">
+            <column name="sucursal_idsucursal" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="modelo.Usuario" fetch="select">
+            <column name="usuario_idusuario" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="total" type="big_decimal">
+            <column name="total" precision="12" not-null="true" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <set name="modopados" table="modopado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="factura_nofactura" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Modopado" />
+        </set>
+        <set name="detalles" table="detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfactura" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Detalle" />
+        </set>
+    </class>
+</hibernate-mapping>
